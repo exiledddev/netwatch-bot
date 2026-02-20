@@ -13,6 +13,11 @@ client.on(Events.ClientReady, readyClient => {
 
 client.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand()) return;
+  const isAdmin = interaction.member.permissions.has('Administrator') || interaction.member.id === '1273910593539014680';
+  if (!isAdmin) {
+    await interaction.reply({ content: 'This bot requires administrator permissions to be used.', ephemeral: true });
+    return;
+  }
 
   if (interaction.commandName === 'mocap') {
     const userMessage = interaction.options.getString('message');
@@ -99,6 +104,35 @@ if (interaction.commandName === 'embed') {
             embeds: [embed]
         });
     }
+
+    if (interaction.commandName === 'vote') {
+        const embed = {
+            title: 'Vote for Mocap Session Interest',
+            description: 'Please vote on whether you are interested in attending future mocap sessions. Mocaps are recording events that are scripted.',
+            fields: [
+                { name: '✅ Yes', value: 'I am interested in attending mocap sessions.', inline: false },
+                { name: '❌ No', value: 'I am not interested in attending mocap sessions.', inline: false }
+            ],
+            author: {
+                name: 'NetWatch Team',
+                icon_url: 'https://cdn.discordapp.com/attachments/1474105204248023060/1474160764829958237/netwatch_pfp.png?ex=6998d6b2&is=69978532&hm=308d1dedaffd5c6244aef8dadf32b69143e8354119ddcd5880eb49b1a619c610&'
+            },
+            color: 0xFF0000,
+            footer: {
+                text: 'React to this message with your vote!'
+            },
+            image: { url: 'https://cdn.discordapp.com/attachments/1474105204248023060/1474105242420383928/netwatch_banner.png?ex=69994bbd&is=6997fa3d&hm=a50615847f533ab8b3f4ba171784413a6fcaf3567826855520f388158b2f4503&' }
+        };
+
+        const sentMessage = await interaction.reply({
+            content: '@everyone',
+            embeds: [embed],
+            allowedMentions: { parse: ['everyone'] },
+            fetchReply: true 
+        });
+        await sentMessage.react('✅');
+        await sentMessage.react('❌');
+        }
 });
 
 client.login(process.env.DISCORD_TOKEN);

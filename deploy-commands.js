@@ -3,7 +3,8 @@ import 'dotenv/config';
 
 const guildIds = [
   "1459537410139357277",
-  "1455590157028950222"
+  "1455590157028950222",
+  "1233277040837263360"
 ];
 
 const commands = [
@@ -80,6 +81,11 @@ const commands = [
     new SlashCommandBuilder()
     .setName('welcome')
     .setDescription('Sends the NetWatch guide/welcome message in the current channel.')
+    .toJSON(),
+
+    new SlashCommandBuilder()
+    .setName('vote')
+    .setDescription('Sends the voting option for whether members are interested or not in Mocaps.')
     .toJSON()
 ];
 
