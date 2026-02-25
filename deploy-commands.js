@@ -4,7 +4,7 @@ import 'dotenv/config';
 const guildIds = [
   "1459537410139357277",
   "1455590157028950222",
-  "1233277040837263360"
+  "1156448457767276544"
 ];
 
 const commands = [
@@ -86,6 +86,20 @@ const commands = [
     new SlashCommandBuilder()
     .setName('vote')
     .setDescription('Sends the voting option for whether members are interested or not in Mocaps.')
+    .toJSON(),
+
+    new SlashCommandBuilder()
+    .setName('form')
+    .setDescription('Sends the requested form.')
+    .addStringOption(option =>
+        option.setName('form')
+            .setDescription('The form you want to receive. Options: main_actor, builder_form')
+            .setRequired(true)
+            .addChoices(
+              { name: 'Main Actor Form', value: 'main_actor' },
+              { name: 'Builder Form', value: 'builder_form' }
+            )
+    )
     .toJSON()
 ];
 

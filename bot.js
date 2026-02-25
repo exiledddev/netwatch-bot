@@ -133,6 +133,51 @@ if (interaction.commandName === 'embed') {
         await sentMessage.react('✅');
         await sentMessage.react('❌');
         }
+
+        if (interaction.commandName === 'form') {
+            const formType = interaction.options.getString('form');
+            
+            if (formType === 'main_actor') {
+                const embed = {
+                    author: {
+                        name: 'Island SMP Team',
+                        icon_url: 'https://cdn.discordapp.com/attachments/1474105204248023060/1474160764829958237/netwatch_pfp.png?ex=6998d6b2&is=69978532&hm=308d1dedaffd5c6244aef8dadf32b69143e8354119ddcd5880eb49b1a619c610&'
+                    },
+                    title: 'Apply for Main Actor Role',
+                    description: 'If you are interested in being a main actor for our mocap sessions, please fill out the form linked below. Main actors are featured prominently in our mocap sessions and often have speaking roles.',
+                    fields: [
+                        { name: 'Form Link', value: '[Main Actor Application Form](https://forms.gle/TAXWJ3FhWmQsNLxt7)' }
+                    ],
+                    color: 0x00FF00,
+                    footer: { text: 'Please note that filling out the form does not guarantee a role. We will review all applications and reach out to selected candidates.' }
+                }
+                await interaction.reply({
+                    embeds: [embed],
+                    ephemeral: false
+                });
+            }
+
+            else if (formType === 'builder_form') {
+                const embed = {
+                    author: {
+                        name: 'Island SMP Team',
+                        icon_url: 'https://cdn.discordapp.com/attachments/1474105204248023060/1474160764829958237/netwatch_pfp.png?ex=6998d6b2&is=69978532&hm=308d1dedaffd5c6244aef8dadf32b69143e8354119ddcd5880eb49b1a619c610&'
+                    },
+                    title: 'Apply for Builder Role',
+                    description: 'If you are interested in being a builder for our mocap sessions, please fill out the form linked below. Builders help create the sets and environments for our mocap sessions.',
+                    fields: [
+                        { name: 'Form Link', value: '[Builder Application Form](https://forms.gle/bEqpLkRzkcZgHr1e9)' }
+                    ],
+                    color: 0x0000FF,
+                    footer: { text: 'Please note that filling out the form does not guarantee a role. We will review all applications and reach out to selected candidates.' }
+                }
+                await interaction.reply({
+                    embeds: [embed],
+                    ephemeral: false
+                });
+            }
+        }
+
 });
 
 client.login(process.env.DISCORD_TOKEN);
